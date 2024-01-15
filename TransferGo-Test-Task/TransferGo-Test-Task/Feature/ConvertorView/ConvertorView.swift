@@ -9,13 +9,15 @@ import SwiftUI
 
 struct ConvertorView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        VStack(spacing: .zero) {
+            ConvertorFormView(formType: .sending)
+                .padding(.horizontal, Theme.Dimensions.marginMediumPlus)
+                .offset(y: Theme.Constants.ConvertorView.yOffsetForTopRectangle)
+                .zIndex(1)
+            ConvertorFormView(formType: .reciver)
+                .padding(.horizontal, Theme.Dimensions.marginMediumPlus)
+            Spacer()
         }
-        .padding()
     }
 }
 

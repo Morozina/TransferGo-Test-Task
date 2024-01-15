@@ -14,6 +14,21 @@
 		1858BA172B55BD0F00B9DE09 /* TransferGo_Test_TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1858BA162B55BD0F00B9DE09 /* TransferGo_Test_TaskTests.swift */; };
 		1858BA212B55BD0F00B9DE09 /* TransferGo_Test_TaskUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1858BA202B55BD0F00B9DE09 /* TransferGo_Test_TaskUITests.swift */; };
 		1858BA232B55BD0F00B9DE09 /* TransferGo_Test_TaskUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1858BA222B55BD0F00B9DE09 /* TransferGo_Test_TaskUITestsLaunchTests.swift */; };
+		1858BA392B55D29D00B9DE09 /* Theme+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1858BA352B55D29C00B9DE09 /* Theme+Colors.swift */; };
+		1858BA3A2B55D29D00B9DE09 /* Theme+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1858BA362B55D29C00B9DE09 /* Theme+Constants.swift */; };
+		1858BA3B2B55D29D00B9DE09 /* Theme+Dimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1858BA372B55D29C00B9DE09 /* Theme+Dimensions.swift */; };
+		1858BA3C2B55D29D00B9DE09 /* Theme+Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1858BA382B55D29D00B9DE09 /* Theme+Fonts.swift */; };
+		1858BA532B55E3FC00B9DE09 /* Inter-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1858BA4A2B55E3FB00B9DE09 /* Inter-ExtraLight.ttf */; };
+		1858BA542B55E3FC00B9DE09 /* Inter-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1858BA4B2B55E3FB00B9DE09 /* Inter-Thin.ttf */; };
+		1858BA552B55E3FC00B9DE09 /* Inter-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1858BA4C2B55E3FB00B9DE09 /* Inter-ExtraBold.ttf */; };
+		1858BA562B55E3FC00B9DE09 /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1858BA4D2B55E3FB00B9DE09 /* Inter-Bold.ttf */; };
+		1858BA572B55E3FC00B9DE09 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1858BA4E2B55E3FB00B9DE09 /* Inter-Medium.ttf */; };
+		1858BA582B55E3FC00B9DE09 /* Inter-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1858BA4F2B55E3FC00B9DE09 /* Inter-Light.ttf */; };
+		1858BA592B55E3FC00B9DE09 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1858BA502B55E3FC00B9DE09 /* Inter-Regular.ttf */; };
+		1858BA5A2B55E3FC00B9DE09 /* Inter-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1858BA512B55E3FC00B9DE09 /* Inter-Black.ttf */; };
+		1858BA5B2B55E3FC00B9DE09 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1858BA522B55E3FC00B9DE09 /* Inter-SemiBold.ttf */; };
+		1858BA5F2B55E72300B9DE09 /* ConvertorFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1858BA5E2B55E72300B9DE09 /* ConvertorFormView.swift */; };
+		1858BA622B55E75100B9DE09 /* ConvertorFormType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1858BA612B55E75100B9DE09 /* ConvertorFormType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +60,22 @@
 		1858BA1C2B55BD0F00B9DE09 /* TransferGo-Test-TaskUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TransferGo-Test-TaskUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1858BA202B55BD0F00B9DE09 /* TransferGo_Test_TaskUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferGo_Test_TaskUITests.swift; sourceTree = "<group>"; };
 		1858BA222B55BD0F00B9DE09 /* TransferGo_Test_TaskUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferGo_Test_TaskUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1858BA352B55D29C00B9DE09 /* Theme+Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Theme+Colors.swift"; sourceTree = "<group>"; };
+		1858BA362B55D29C00B9DE09 /* Theme+Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Theme+Constants.swift"; sourceTree = "<group>"; };
+		1858BA372B55D29C00B9DE09 /* Theme+Dimensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Theme+Dimensions.swift"; sourceTree = "<group>"; };
+		1858BA382B55D29D00B9DE09 /* Theme+Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Theme+Fonts.swift"; sourceTree = "<group>"; };
+		1858BA492B55E29A00B9DE09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1858BA4A2B55E3FB00B9DE09 /* Inter-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-ExtraLight.ttf"; sourceTree = "<group>"; };
+		1858BA4B2B55E3FB00B9DE09 /* Inter-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Thin.ttf"; sourceTree = "<group>"; };
+		1858BA4C2B55E3FB00B9DE09 /* Inter-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-ExtraBold.ttf"; sourceTree = "<group>"; };
+		1858BA4D2B55E3FB00B9DE09 /* Inter-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Bold.ttf"; sourceTree = "<group>"; };
+		1858BA4E2B55E3FB00B9DE09 /* Inter-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.ttf"; sourceTree = "<group>"; };
+		1858BA4F2B55E3FC00B9DE09 /* Inter-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Light.ttf"; sourceTree = "<group>"; };
+		1858BA502B55E3FC00B9DE09 /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
+		1858BA512B55E3FC00B9DE09 /* Inter-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Black.ttf"; sourceTree = "<group>"; };
+		1858BA522B55E3FC00B9DE09 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.ttf"; sourceTree = "<group>"; };
+		1858BA5E2B55E72300B9DE09 /* ConvertorFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertorFormView.swift; sourceTree = "<group>"; };
+		1858BA612B55E75100B9DE09 /* ConvertorFormType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertorFormType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +126,7 @@
 		1858BA032B55BD0E00B9DE09 /* TransferGo-Test-Task */ = {
 			isa = PBXGroup;
 			children = (
+				1858BA5C2B55E70500B9DE09 /* UI Elements */,
 				1858BA322B55D1EA00B9DE09 /* Feature */,
 				1858BA2F2B55D1CB00B9DE09 /* Application */,
 				1858BA0B2B55BD0F00B9DE09 /* Preview Content */,
@@ -130,7 +162,10 @@
 		1858BA2F2B55D1CB00B9DE09 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				1858BA3D2B55E0A000B9DE09 /* Font */,
+				1858BA342B55D27B00B9DE09 /* Theme */,
 				1858BA0A2B55BD0F00B9DE09 /* TransferGo_Test_Task.entitlements */,
+				1858BA492B55E29A00B9DE09 /* Info.plist */,
 				1858BA312B55D1DD00B9DE09 /* Assets */,
 				1858BA302B55D1D300B9DE09 /* Initial View */,
 			);
@@ -164,9 +199,61 @@
 		1858BA332B55D1EF00B9DE09 /* ConvertorView */ = {
 			isa = PBXGroup;
 			children = (
+				1858BA602B55E74000B9DE09 /* Model */,
 				1858BA062B55BD0E00B9DE09 /* ConvertorView.swift */,
 			);
 			path = ConvertorView;
+			sourceTree = "<group>";
+		};
+		1858BA342B55D27B00B9DE09 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				1858BA352B55D29C00B9DE09 /* Theme+Colors.swift */,
+				1858BA362B55D29C00B9DE09 /* Theme+Constants.swift */,
+				1858BA372B55D29C00B9DE09 /* Theme+Dimensions.swift */,
+				1858BA382B55D29D00B9DE09 /* Theme+Fonts.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		1858BA3D2B55E0A000B9DE09 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				1858BA512B55E3FC00B9DE09 /* Inter-Black.ttf */,
+				1858BA4D2B55E3FB00B9DE09 /* Inter-Bold.ttf */,
+				1858BA4C2B55E3FB00B9DE09 /* Inter-ExtraBold.ttf */,
+				1858BA4A2B55E3FB00B9DE09 /* Inter-ExtraLight.ttf */,
+				1858BA4F2B55E3FC00B9DE09 /* Inter-Light.ttf */,
+				1858BA4E2B55E3FB00B9DE09 /* Inter-Medium.ttf */,
+				1858BA502B55E3FC00B9DE09 /* Inter-Regular.ttf */,
+				1858BA522B55E3FC00B9DE09 /* Inter-SemiBold.ttf */,
+				1858BA4B2B55E3FB00B9DE09 /* Inter-Thin.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		1858BA5C2B55E70500B9DE09 /* UI Elements */ = {
+			isa = PBXGroup;
+			children = (
+				1858BA5D2B55E71000B9DE09 /* Convertor Form View */,
+			);
+			path = "UI Elements";
+			sourceTree = "<group>";
+		};
+		1858BA5D2B55E71000B9DE09 /* Convertor Form View */ = {
+			isa = PBXGroup;
+			children = (
+				1858BA5E2B55E72300B9DE09 /* ConvertorFormView.swift */,
+			);
+			path = "Convertor Form View";
+			sourceTree = "<group>";
+		};
+		1858BA602B55E74000B9DE09 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1858BA612B55E75100B9DE09 /* ConvertorFormType.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,7 +360,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1858BA562B55E3FC00B9DE09 /* Inter-Bold.ttf in Resources */,
+				1858BA592B55E3FC00B9DE09 /* Inter-Regular.ttf in Resources */,
+				1858BA552B55E3FC00B9DE09 /* Inter-ExtraBold.ttf in Resources */,
+				1858BA5B2B55E3FC00B9DE09 /* Inter-SemiBold.ttf in Resources */,
+				1858BA582B55E3FC00B9DE09 /* Inter-Light.ttf in Resources */,
+				1858BA542B55E3FC00B9DE09 /* Inter-Thin.ttf in Resources */,
 				1858BA0D2B55BD0F00B9DE09 /* Preview Assets.xcassets in Resources */,
+				1858BA572B55E3FC00B9DE09 /* Inter-Medium.ttf in Resources */,
+				1858BA5A2B55E3FC00B9DE09 /* Inter-Black.ttf in Resources */,
+				1858BA532B55E3FC00B9DE09 /* Inter-ExtraLight.ttf in Resources */,
 				1858BA092B55BD0F00B9DE09 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -299,8 +395,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1858BA5F2B55E72300B9DE09 /* ConvertorFormView.swift in Sources */,
 				1858BA072B55BD0E00B9DE09 /* ConvertorView.swift in Sources */,
+				1858BA622B55E75100B9DE09 /* ConvertorFormType.swift in Sources */,
 				1858BA052B55BD0E00B9DE09 /* TransferGo_Test_TaskApp.swift in Sources */,
+				1858BA3C2B55D29D00B9DE09 /* Theme+Fonts.swift in Sources */,
+				1858BA392B55D29D00B9DE09 /* Theme+Colors.swift in Sources */,
+				1858BA3A2B55D29D00B9DE09 /* Theme+Constants.swift in Sources */,
+				1858BA3B2B55D29D00B9DE09 /* Theme+Dimensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,6 +566,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "TransferGo-Test-Task/Application/Info.plist";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -503,6 +606,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "TransferGo-Test-Task/Application/Info.plist";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
