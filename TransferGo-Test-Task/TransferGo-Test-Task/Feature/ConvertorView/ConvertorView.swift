@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  ConvertorView.swift
 //  TransferGo-Test-Task
 //
 //  Created by Vladyslav Moroz on 15/01/2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct ConvertorView: View {
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -20,5 +20,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ConvertorView()
 }
