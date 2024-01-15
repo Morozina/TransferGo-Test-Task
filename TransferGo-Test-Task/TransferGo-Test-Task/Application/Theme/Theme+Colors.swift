@@ -15,5 +15,6 @@ extension Theme {
 
         // Texts
         static let textGray        = #colorLiteral(red: 0.4156862745, green: 0.4520910978, blue: 0.4784313725, alpha: 1) // red: 106, green: 115, blue: 122
+        static let textBlue        = #colorLiteral(red: 0.1932040751, green: 0.4967796206, blue: 0.9606031775, alpha: 1) // red: 71, green: 125, blue: 237
     }
 }

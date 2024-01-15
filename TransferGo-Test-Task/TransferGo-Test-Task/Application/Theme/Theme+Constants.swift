@@ -37,6 +37,8 @@ extension Theme {
             static let smallFlagSize: CGSize = CGSize(width: 24, height: 24)
             static let maxCardHeight: CGFloat = 92
             static let yOffsetForTopRectangle: CGFloat = 25
+            static let yOffsetForReverseButton: CGFloat = 35
+            static let yOffsetForCurrencyText: CGFloat = 32
         }
 
         enum SerchView {

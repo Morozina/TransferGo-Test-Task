@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ConvertorFormView: View {
     let formType: ConvertorFormType
+    @State var inputValue: String = "100"
 
     var body: some View {
         HStack(spacing: .zero) {
@@ -17,10 +19,11 @@ struct ConvertorFormView: View {
                 CurrencyButton
             }
             Spacer()
+            TextFieldSection
         }
         .padding(.horizontal, Theme.Dimensions.marginSmallHorizontal)
-        .padding(.vertical, Theme.Dimensions.marginMediumVertical)
-        .padding(.top, formType == .reciver ? Theme.Dimensions.marginSemiMedium : .zero)
+        .padding(.bottom, Theme.Dimensions.marginSemiMedium)
+        .padding(.top, formType == .reciver ? Theme.Dimensions.marginSemiExtraLarge : Theme.Dimensions.marginMediumVertical)
         .background(
             RoundedRectangle(cornerRadius: Theme.Constants.defaultCornerRadius)
                 .fill(formType == .reciver ? Color(Theme.Colors.gray) : Color.white)
@@ -55,6 +58,20 @@ struct ConvertorFormView: View {
                     .foregroundColor(Color(Theme.Colors.textGray))
             }
         }
+    }
+
+    var TextFieldSection: some View {
+        TextField("........", text: $inputValue)
+            .font(Theme.Fonts.boldl32)
+            .foregroundColor(formType == .reciver ? Color.black : Color(Theme.Colors.textBlue))
+            .multilineTextAlignment(.trailing)
+            .keyboardType(.numberPad)
+            .disabled(formType == .reciver)
+            .onReceive(Just(inputValue)) { newValue in
+                if newValue.count > 6 {
+                    inputValue = String(newValue.prefix(6))
+                }
+            }
     }
 }
 

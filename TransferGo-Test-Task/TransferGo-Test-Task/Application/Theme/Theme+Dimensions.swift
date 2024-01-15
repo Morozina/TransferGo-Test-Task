@@ -58,14 +58,17 @@ class Theme {
         /// Large margin: 32 px
         static let marginLarge: CGFloat = 32
 
-        /// Semi extra large margin: 44 px
-        static let marginSemiExtraLarge: CGFloat = 44
+        /// Semi extra large margin: 40 px
+        static let marginSemiExtraLarge: CGFloat = 40
 
         /// Extra  large margin: 48 px
         static let marginExtraLarge: CGFloat = 48
 
         /// Extra Extra large margin: 60 px
         static let marginExtraExtraLarge: CGFloat = 60
+
+        /// Super large margin: 60 px
+        static let marginSuperLarge: CGFloat = 70
 
         /// Default iPad margin: 200 px
         static let marginDefaultIPad: CGFloat = 200

@@ -10,7 +10,11 @@ import SwiftUI
 extension Theme {
     enum Fonts {
         // MARK: - Bold
-        static let boldl14: Font = .custom("Inter-Bold", size: 14).weight(.bold)
+        static let boldl32: Font = .custom("Inter", size: 32).weight(.bold)
+
+        static let boldl14: Font = .custom("Inter", size: 14).weight(.bold)
+
+        static let boldl10: Font = .custom("Inter", size: 10).weight(.bold)
 
         // MARK: - Medium
         static let medium18: Font = .system(size: 18, weight: .medium)
