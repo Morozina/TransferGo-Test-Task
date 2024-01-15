@@ -41,6 +41,10 @@ extension Theme {
             static let yOffsetForCurrencyText: CGFloat = 32
         }
 
+        enum ConvertorForm {
+            static let maxTextFieldCount: Int = 6
+        }
+
         enum SerchView {
             static let maxCardHeight: CGFloat = 500
             static let imageHeight: CGFloat = 234

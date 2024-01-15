@@ -33,7 +33,6 @@ class Theme {
         /// Small horizontal margin: 15 px
         static let marginSmallHorizontal: CGFloat = 12
 
-
         /// Medium horizontal margin: 15 px
         static let marginMediumHorizontal: CGFloat = 15
 

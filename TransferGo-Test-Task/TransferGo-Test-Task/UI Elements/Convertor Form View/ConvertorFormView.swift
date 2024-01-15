@@ -68,8 +68,8 @@ struct ConvertorFormView: View {
             .keyboardType(.numberPad)
             .disabled(formType == .reciver)
             .onReceive(Just(inputValue)) { newValue in
-                if newValue.count > 6 {
-                    inputValue = String(newValue.prefix(6))
+                if newValue.count > Theme.Constants.ConvertorForm.maxTextFieldCount {
+                    inputValue = String(newValue.prefix(Theme.Constants.ConvertorForm.maxTextFieldCount))
                 }
             }
     }
