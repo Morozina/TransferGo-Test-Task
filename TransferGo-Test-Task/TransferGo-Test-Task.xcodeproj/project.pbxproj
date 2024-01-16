@@ -29,6 +29,11 @@
 		1858BA5B2B55E3FC00B9DE09 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1858BA522B55E3FC00B9DE09 /* Inter-SemiBold.ttf */; };
 		1858BA5F2B55E72300B9DE09 /* ConvertorFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1858BA5E2B55E72300B9DE09 /* ConvertorFormView.swift */; };
 		1858BA622B55E75100B9DE09 /* ConvertorFormType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1858BA612B55E75100B9DE09 /* ConvertorFormType.swift */; };
+		1858BA692B56CB7A00B9DE09 /* ExchangeRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1858BA682B56CB7A00B9DE09 /* ExchangeRate.swift */; };
+		1858BA6C2B56CB9B00B9DE09 /* GetExchangeRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1858BA6B2B56CB9B00B9DE09 /* GetExchangeRate.swift */; };
+		1858BA6E2B56CBDA00B9DE09 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1858BA6D2B56CBDA00B9DE09 /* Currency.swift */; };
+		1858BA712B56D09A00B9DE09 /* ConvertorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1858BA702B56D09A00B9DE09 /* ConvertorViewModel.swift */; };
+		1858BA742B56DD9900B9DE09 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1858BA732B56DD9900B9DE09 /* View+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +81,11 @@
 		1858BA522B55E3FC00B9DE09 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.ttf"; sourceTree = "<group>"; };
 		1858BA5E2B55E72300B9DE09 /* ConvertorFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertorFormView.swift; sourceTree = "<group>"; };
 		1858BA612B55E75100B9DE09 /* ConvertorFormType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertorFormType.swift; sourceTree = "<group>"; };
+		1858BA682B56CB7A00B9DE09 /* ExchangeRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRate.swift; sourceTree = "<group>"; };
+		1858BA6B2B56CB9B00B9DE09 /* GetExchangeRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetExchangeRate.swift; sourceTree = "<group>"; };
+		1858BA6D2B56CBDA00B9DE09 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
+		1858BA702B56D09A00B9DE09 /* ConvertorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertorViewModel.swift; sourceTree = "<group>"; };
+		1858BA732B56DD9900B9DE09 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +136,7 @@
 		1858BA032B55BD0E00B9DE09 /* TransferGo-Test-Task */ = {
 			isa = PBXGroup;
 			children = (
+				1858BA6A2B56CB8500B9DE09 /* Networking */,
 				1858BA5C2B55E70500B9DE09 /* UI Elements */,
 				1858BA322B55D1EA00B9DE09 /* Feature */,
 				1858BA2F2B55D1CB00B9DE09 /* Application */,
@@ -162,6 +173,7 @@
 		1858BA2F2B55D1CB00B9DE09 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				1858BA722B56DD8500B9DE09 /* Extensions */,
 				1858BA3D2B55E0A000B9DE09 /* Font */,
 				1858BA342B55D27B00B9DE09 /* Theme */,
 				1858BA0A2B55BD0F00B9DE09 /* TransferGo_Test_Task.entitlements */,
@@ -199,6 +211,7 @@
 		1858BA332B55D1EF00B9DE09 /* ConvertorView */ = {
 			isa = PBXGroup;
 			children = (
+				1858BA6F2B56D08F00B9DE09 /* ViewModel */,
 				1858BA602B55E74000B9DE09 /* Model */,
 				1858BA062B55BD0E00B9DE09 /* ConvertorView.swift */,
 			);
@@ -252,8 +265,34 @@
 			isa = PBXGroup;
 			children = (
 				1858BA612B55E75100B9DE09 /* ConvertorFormType.swift */,
+				1858BA682B56CB7A00B9DE09 /* ExchangeRate.swift */,
+				1858BA6D2B56CBDA00B9DE09 /* Currency.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		1858BA6A2B56CB8500B9DE09 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				1858BA6B2B56CB9B00B9DE09 /* GetExchangeRate.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		1858BA6F2B56D08F00B9DE09 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				1858BA702B56D09A00B9DE09 /* ConvertorViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		1858BA722B56DD8500B9DE09 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1858BA732B56DD9900B9DE09 /* View+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -395,13 +434,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1858BA6E2B56CBDA00B9DE09 /* Currency.swift in Sources */,
 				1858BA5F2B55E72300B9DE09 /* ConvertorFormView.swift in Sources */,
+				1858BA6C2B56CB9B00B9DE09 /* GetExchangeRate.swift in Sources */,
 				1858BA072B55BD0E00B9DE09 /* ConvertorView.swift in Sources */,
 				1858BA622B55E75100B9DE09 /* ConvertorFormType.swift in Sources */,
+				1858BA712B56D09A00B9DE09 /* ConvertorViewModel.swift in Sources */,
 				1858BA052B55BD0E00B9DE09 /* TransferGo_Test_TaskApp.swift in Sources */,
 				1858BA3C2B55D29D00B9DE09 /* Theme+Fonts.swift in Sources */,
 				1858BA392B55D29D00B9DE09 /* Theme+Colors.swift in Sources */,
+				1858BA742B56DD9900B9DE09 /* View+Extensions.swift in Sources */,
 				1858BA3A2B55D29D00B9DE09 /* Theme+Constants.swift in Sources */,
+				1858BA692B56CB7A00B9DE09 /* ExchangeRate.swift in Sources */,
 				1858BA3B2B55D29D00B9DE09 /* Theme+Dimensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

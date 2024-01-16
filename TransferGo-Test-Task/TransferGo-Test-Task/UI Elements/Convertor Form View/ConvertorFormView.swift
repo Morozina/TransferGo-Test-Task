@@ -9,12 +9,17 @@ import SwiftUI
 import Combine
 
 struct ConvertorFormView: View {
+    //MARK: - Binding
+    @Binding var ammout: String
+
+    // MARK: - Dependencies
+    let currency: String
     let formType: ConvertorFormType
-    @State var inputValue: String = "100"
+    let onAction: ((String) -> Void)?
 
     var body: some View {
         HStack(spacing: .zero) {
-            VStack(spacing: Theme.Dimensions.marginSmallVertical) {
+            VStack(alignment: .leading, spacing: Theme.Dimensions.marginSmallVertical) {
                 FormTypeSection
                 CurrencyButton
             }
@@ -23,16 +28,16 @@ struct ConvertorFormView: View {
         }
         .padding(.horizontal, Theme.Dimensions.marginSmallHorizontal)
         .padding(.bottom, Theme.Dimensions.marginSemiMedium)
-        .padding(.top, formType == .reciver ? Theme.Dimensions.marginSemiExtraLarge : Theme.Dimensions.marginMediumVertical)
+        .padding(.top, isReciver ? Theme.Dimensions.marginSemiExtraLarge : Theme.Dimensions.marginMediumVertical)
         .background(
             RoundedRectangle(cornerRadius: Theme.Constants.defaultCornerRadius)
-                .fill(formType == .reciver ? Color(Theme.Colors.gray) : Color.white)
-                .shadow(color: .black.opacity(formType == .reciver ? .zero : Theme.Constants.smallShadowOpacity), radius: Theme.Dimensions.defaultLayoutMargin, x: .zero, y: .zero)
+                .fill(isReciver ? Color(Theme.Colors.gray) : Color.white)
+                .shadow(color: .black.opacity(isReciver ? .zero : Theme.Constants.smallShadowOpacity), radius: Theme.Dimensions.defaultLayoutMargin, x: .zero, y: .zero)
         )
     }
 
     var FormTypeSection: some View {
-        Text(formType == .reciver ? "Reciver gets" : "Sending from")
+        Text(isReciver ? "Reciver gets" : "Sending from")
             .font(Theme.Fonts.normal14)
             .foregroundColor(Color(Theme.Colors.textGray))
     }
@@ -50,7 +55,7 @@ struct ConvertorFormView: View {
                         Circle()
                             .strokeBorder(Color.white.opacity(Theme.Constants.halfShadowOpacity), lineWidth: Theme.Dimensions.marginSmall)
                     )
-                Text("PLN")
+                Text(currency)
                     .font(Theme.Fonts.boldl14)
                     .foregroundColor(.black)
                 Image(systemName: "chevron.down")
@@ -61,20 +66,29 @@ struct ConvertorFormView: View {
     }
 
     var TextFieldSection: some View {
-        TextField("........", text: $inputValue)
+        TextField("........", text: $ammout)
             .font(Theme.Fonts.boldl32)
-            .foregroundColor(formType == .reciver ? Color.black : Color(Theme.Colors.textBlue))
+            .foregroundColor(isReciver ? Color.black : Color(Theme.Colors.textBlue))
             .multilineTextAlignment(.trailing)
             .keyboardType(.numberPad)
-            .disabled(formType == .reciver)
-            .onReceive(Just(inputValue)) { newValue in
-                if newValue.count > Theme.Constants.ConvertorForm.maxTextFieldCount {
-                    inputValue = String(newValue.prefix(Theme.Constants.ConvertorForm.maxTextFieldCount))
+            .disabled(isReciver)
+            .onReceive(Just(ammout)) { newValue in
+                if newValue.count > Theme.Constants.ConvertorForm.maxTextFieldCount && !isReciver {
+                    ammout = String(newValue.prefix(Theme.Constants.ConvertorForm.maxTextFieldCount))
                 }
             }
+            .onChange(of: ammout) { oldValue, newValue in
+                if oldValue.count < newValue.count {
+                    onAction?(ammout)
+                }
+            }
+    }
+
+    var isReciver: Bool {
+        formType == .reciver
     }
 }
 
 #Preview {
-    ConvertorFormView(formType: .reciver)
+    ConvertorFormView(ammout: .constant(""), currency: "", formType: .reciver, onAction: nil)
 }

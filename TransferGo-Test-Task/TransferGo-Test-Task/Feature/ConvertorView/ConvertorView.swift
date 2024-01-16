@@ -8,9 +8,16 @@
 import SwiftUI
 
 struct ConvertorView: View {
+    @StateObject var viewModel: ConvertorViewModel
+
     var body: some View {
         VStack(spacing: .zero) {
-            ConvertorFormView(formType: .sending)
+            if !viewModel.isLoading {
+                ConvertorFormView(ammout: $viewModel.fromAmount, currency: viewModel.from, formType: .sending) { ammout in
+                    Task {
+                        await viewModel.updateCalculator(ammount: Double(ammout) ?? 1)
+                    }
+                }
                 .padding(.horizontal, Theme.Dimensions.marginMediumPlus)
                 .offset(y: Theme.Constants.ConvertorView.yOffsetForTopRectangle)
                 .zIndex(1)
@@ -20,9 +27,18 @@ struct ConvertorView: View {
                 .overlay(alignment: .bottom) {
                     CurrencySection
                 }
-            ConvertorFormView(formType: .reciver)
-                .padding(.horizontal, Theme.Dimensions.marginMediumPlus)
-            Spacer()
+                ConvertorFormView(ammout: $viewModel.toAmount, currency: viewModel.to, formType: .reciver, onAction: nil)
+                    .padding(.horizontal, Theme.Dimensions.marginMediumPlus)
+                Spacer()
+            }
+        }
+        .onAppear {
+            Task {
+                await viewModel.updateCalculator()
+            }
+        }
+        .onTapGesture {
+            hideKeyboard()
         }
     }
 
@@ -37,7 +53,7 @@ struct ConvertorView: View {
     }
 
     var CurrencySection: some View {
-        Text("1 PLN ~ 7.23384 UAH")
+        Text("1 \(viewModel.from) ~ \(viewModel.rate) \(viewModel.to)")
             .font(Theme.Fonts.boldl10)
             .foregroundColor(.white)
             .padding(.horizontal, Theme.Dimensions.defaultLayoutMargin)
@@ -51,5 +67,5 @@ struct ConvertorView: View {
 }
 
 #Preview {
-    ConvertorView()
+    ConvertorView(viewModel: ConvertorViewModel())
 }
