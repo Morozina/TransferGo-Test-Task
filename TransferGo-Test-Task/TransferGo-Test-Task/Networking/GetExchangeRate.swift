@@ -8,12 +8,12 @@
 import Foundation
 
 protocol GetExchangeRate {
-    func getExchangeRate(for sender: Currency, to reciver: Currency, ammount: Double) async -> ExchangeRate?
+    func getExchangeRate(for sender: Countries, to reciver: Countries, ammount: Double) async -> ExchangeRate?
 }
 
 final class GetExchangeRateImpl: GetExchangeRate {
-    func getExchangeRate(for sender: Currency, to reciver: Currency, ammount: Double) async -> ExchangeRate? {
-        let baseURL: URL = URL(string: "https://my.transfergo.com/api/fx-rates?from=\(sender.rawValue)&to=\(reciver.rawValue)&amount=\(ammount)")!
+    func getExchangeRate(for sender: Countries, to reciver: Countries, ammount: Double) async -> ExchangeRate? {
+        let baseURL: URL = URL(string: "https://my.transfergo.com/api/fx-rates?from=\(sender.countryСurrency)&to=\(reciver.countryСurrency)&amount=\(ammount)")!
 
         do {
             let (data, _) = try await URLSession.shared.data(from: baseURL)

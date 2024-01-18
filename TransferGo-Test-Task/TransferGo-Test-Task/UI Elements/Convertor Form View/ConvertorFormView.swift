@@ -13,9 +13,10 @@ struct ConvertorFormView: View {
     @Binding var ammout: String
 
     // MARK: - Dependencies
-    let currency: String
+    let associatedCountry: Countries
     let formType: ConvertorFormType
-    let onAction: ((String) -> Void)?
+    let onAmmoutAction: ((String) -> Void)?
+    let onFlagAction: ((Countries) -> Void)?
 
     var body: some View {
         HStack(spacing: .zero) {
@@ -47,7 +48,7 @@ struct ConvertorFormView: View {
 
         } label: {
             HStack(spacing: Theme.Dimensions.marginExtraExtraSmall) {
-                Image("UA")
+                Image(associatedCountry.countryFlag)
                     .resizable()
                     .frame(width: Theme.Constants.ConvertorView.smallFlagSize.width, height: Theme.Constants.ConvertorView.smallFlagSize.width)
                     .clipShape(Circle())
@@ -55,7 +56,7 @@ struct ConvertorFormView: View {
                         Circle()
                             .strokeBorder(Color.white.opacity(Theme.Constants.halfShadowOpacity), lineWidth: Theme.Dimensions.marginSmall)
                     )
-                Text(currency)
+                Text(associatedCountry.countryСurrency)
                     .font(Theme.Fonts.boldl14)
                     .foregroundColor(.black)
                 Image(systemName: "chevron.down")
@@ -79,7 +80,7 @@ struct ConvertorFormView: View {
             }
             .onChange(of: ammout) { oldValue, newValue in
                 if oldValue.count < newValue.count {
-                    onAction?(ammout)
+                    onAmmoutAction?(ammout)
                 }
             }
     }
@@ -90,5 +91,5 @@ struct ConvertorFormView: View {
 }
 
 #Preview {
-    ConvertorFormView(ammout: .constant(""), currency: "", formType: .reciver, onAction: nil)
+    ConvertorFormView(ammout: .constant(""), associatedCountry: .dk, formType: .reciver, onAmmoutAction: nil, onFlagAction: nil)
 }

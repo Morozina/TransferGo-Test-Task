@@ -13,10 +13,12 @@ struct ConvertorView: View {
     var body: some View {
         VStack(spacing: .zero) {
             if !viewModel.isLoading {
-                ConvertorFormView(ammout: $viewModel.fromAmount, currency: viewModel.from, formType: .sending) { ammout in
+                ConvertorFormView(ammout: $viewModel.fromAmount, associatedCountry: viewModel.sender, formType: .sending) { ammout in
                     Task {
                         await viewModel.updateCalculator(ammount: Double(ammout) ?? 1)
                     }
+                } onFlagAction: { country in
+
                 }
                 .padding(.horizontal, Theme.Dimensions.marginMediumPlus)
                 .offset(y: Theme.Constants.ConvertorView.yOffsetForTopRectangle)
@@ -27,15 +29,15 @@ struct ConvertorView: View {
                 .overlay(alignment: .bottom) {
                     CurrencySection
                 }
-                ConvertorFormView(ammout: $viewModel.toAmount, currency: viewModel.to, formType: .reciver, onAction: nil)
-                    .padding(.horizontal, Theme.Dimensions.marginMediumPlus)
+                ConvertorFormView(ammout: $viewModel.toAmount, associatedCountry: viewModel.reciver, formType: .reciver, onAmmoutAction: nil) { country in
+
+                }
+                .padding(.horizontal, Theme.Dimensions.marginMediumPlus)
                 Spacer()
             }
         }
-        .onAppear {
-            Task {
-                await viewModel.updateCalculator()
-            }
+        .task {
+            await viewModel.updateCalculator()
         }
         .onTapGesture {
             hideKeyboard()
