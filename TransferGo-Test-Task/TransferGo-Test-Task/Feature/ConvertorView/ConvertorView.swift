@@ -13,12 +13,13 @@ struct ConvertorView: View {
     var body: some View {
         VStack(spacing: .zero) {
             if !viewModel.isLoading {
-                ConvertorFormView(amount: $viewModel.fromAmount, associatedCountry: viewModel.sender, formType: .sending, isLimitExceeded: viewModel.isLimitExceeded) { amount in
+                ConvertorFormView(amount: $viewModel.fromAmount, associatedCountry: viewModel.sender, formType: .sender, isLimitExceeded: viewModel.isLimitExceeded) { amount in
                     Task {
                         await viewModel.handleTextFieldAction(for: amount)
                     }
-                } onFlagAction: { country in
-
+                } onFlagAction: {
+                    viewModel.isCountryPickerShown = true
+                    viewModel.convertorFormType = .sender
                 }
                 .padding(.horizontal, Theme.Dimensions.marginMediumPlus)
                 .offset(y: Theme.Constants.ConvertorView.yOffsetForTopRectangle)
@@ -29,8 +30,9 @@ struct ConvertorView: View {
                 .overlay(alignment: .bottom) {
                     CurrencySection
                 }
-                ConvertorFormView(amount: $viewModel.toAmount, associatedCountry: viewModel.reciver, formType: .reciver, isLimitExceeded: false, onAmountAction: nil) { country in
-
+                ConvertorFormView(amount: $viewModel.toAmount, associatedCountry: viewModel.reciver, formType: .reciver, isLimitExceeded: false, onAmountAction: nil) {
+                    viewModel.isCountryPickerShown = true
+                    viewModel.convertorFormType = .reciver
                 }
                 .padding(.horizontal, Theme.Dimensions.marginMediumPlus)
                 HStack(spacing: Theme.Dimensions.marginExtraExtraSmall) {
@@ -52,6 +54,9 @@ struct ConvertorView: View {
         }
         .onTapGesture {
             hideKeyboard()
+        }
+        .sheet(isPresented: $viewModel.isCountryPickerShown) {
+            CountryPickerView()
         }
     }
 

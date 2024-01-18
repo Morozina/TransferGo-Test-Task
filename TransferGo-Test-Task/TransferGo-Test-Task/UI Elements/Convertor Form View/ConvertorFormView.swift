@@ -17,7 +17,7 @@ struct ConvertorFormView: View {
     let formType: ConvertorFormType
     let isLimitExceeded: Bool
     let onAmountAction: ((String) -> Void)?
-    let onFlagAction: ((Country) -> Void)?
+    let onFlagAction: (() -> Void)?
 
     var body: some View {
         HStack(spacing: .zero) {
@@ -47,7 +47,7 @@ struct ConvertorFormView: View {
 
     var CurrencyButton: some View {
         Button {
-
+            onFlagAction?()
         } label: {
             HStack(spacing: Theme.Dimensions.marginExtraExtraSmall) {
                 Image(associatedCountry.info.flag)

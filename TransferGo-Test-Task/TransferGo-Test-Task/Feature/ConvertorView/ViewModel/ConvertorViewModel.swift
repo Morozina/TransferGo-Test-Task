@@ -16,7 +16,9 @@ final class ConvertorViewModel: ObservableObject {
     @Published var fromAmount: String = ""
     @Published var toAmount: String = ""
     @Published var isLimitExceeded: Bool = false
+    @Published var isCountryPickerShown: Bool = false
     @Published var isLoading: Bool = true
+    @Published var convertorFormType: ConvertorFormType = .none
     @Published var sender: Country = .pl
     @Published var reciver: Country = .ua
 

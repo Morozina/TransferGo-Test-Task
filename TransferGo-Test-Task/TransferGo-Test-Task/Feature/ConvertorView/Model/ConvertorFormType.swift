@@ -8,6 +8,7 @@
 import Foundation
 
 enum ConvertorFormType {
-    case sending
+    case sender
     case reciver
+    case none
 }
