@@ -1,41 +1,41 @@
 //
-//  Countries.swift
+//  Currency.swift
 //  TransferGo-Test-Task
 //
-//  Created by Vladyslav Moroz on 16/01/2024.
+//  Created by Vladyslav Moroz on 18/01/2024.
 //
 
 import Foundation
 
-enum Countries {
-    case ua
-    case dk
-    case gb
-    case pl
+enum Currency: String {
+    case uah = "UAH"
+    case eur = "EUR"
+    case gbp = "GBP"
+    case pln = "PLN"
 
-    var countryСurrency: String {
+    var maxSendingAmount: Double {
         switch self {
-        case .ua:
-            return "UAH"
-        case .dk:
-            return "EUR"
-        case .gb:
-            return "GBP"
-        case .pl:
-            return "PLN"
+        case .uah:
+            return 50000
+        case .eur:
+            return 5000
+        case .gbp:
+            return 1000
+        case .pln:
+            return 20000
         }
     }
 
-    var countryFlag: String {
+    var maxAmountLabel: String {
         switch self {
-        case .ua:
-            return "UA"
-        case .dk:
-            return "DK"
-        case .gb:
-            return "UK"
-        case .pl:
-            return "PL"
+        case .uah:
+            return "50 000"
+        case .eur:
+            return "5 000"
+        case .gbp:
+            return "1 000"
+        case .pln:
+            return "20 000"
         }
     }
 }
