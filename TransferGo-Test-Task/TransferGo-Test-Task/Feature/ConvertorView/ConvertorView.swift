@@ -13,9 +13,9 @@ struct ConvertorView: View {
     var body: some View {
         VStack(spacing: .zero) {
             if !viewModel.isLoading {
-                ConvertorFormView(ammout: $viewModel.fromAmount, associatedCountry: viewModel.sender, formType: .sending) { ammout in
+                ConvertorFormView(amount: $viewModel.fromAmount, associatedCountry: viewModel.sender, formType: .sending, isLimitExceeded: viewModel.isLimitExceeded) { amount in
                     Task {
-                        await viewModel.updateCalculator(ammount: Double(ammout) ?? 1)
+                        await viewModel.handleTextFieldAction(for: amount)
                     }
                 } onFlagAction: { country in
 
@@ -29,15 +29,26 @@ struct ConvertorView: View {
                 .overlay(alignment: .bottom) {
                     CurrencySection
                 }
-                ConvertorFormView(ammout: $viewModel.toAmount, associatedCountry: viewModel.reciver, formType: .reciver, onAmmoutAction: nil) { country in
+                ConvertorFormView(amount: $viewModel.toAmount, associatedCountry: viewModel.reciver, formType: .reciver, isLimitExceeded: false, onAmountAction: nil) { country in
 
                 }
                 .padding(.horizontal, Theme.Dimensions.marginMediumPlus)
+                HStack(spacing: Theme.Dimensions.marginExtraExtraSmall) {
+                    if viewModel.isLimitExceeded {
+                        Spacer()
+                        Image("alert-circle")
+                        Text(viewModel.getMaxAmountText)
+                            .font(Theme.Fonts.normal14)
+                            .foregroundColor(Color(Theme.Colors.red))
+                        Spacer()
+                    }
+                }
+                .padding(.top, Theme.Dimensions.marginSemiMedium)
                 Spacer()
             }
         }
         .task {
-            await viewModel.updateCalculator()
+            await viewModel.onAppear()
         }
         .onTapGesture {
             hideKeyboard()
