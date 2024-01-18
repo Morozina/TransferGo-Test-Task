@@ -56,7 +56,9 @@ struct ConvertorView: View {
             hideKeyboard()
         }
         .sheet(isPresented: $viewModel.isCountryPickerShown) {
-            CountryPickerView()
+            CountryPickerView(convertorFormType: viewModel.convertorFormType) { country in
+                
+            }
         }
     }
 

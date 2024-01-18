@@ -12,6 +12,9 @@ extension Theme {
         /// Default corner radius size
         static let defaultCornerRadius: CGFloat = 16
 
+        /// Normal corner radius size
+        static let normalCornerRadius: CGFloat = 8
+
         /// Small shadow opacity 20%
         static let smallShadowOpacity: Double = 0.2
 
@@ -46,7 +49,7 @@ extension Theme {
         }
 
         enum SerchView {
-            static let maxCardHeight: CGFloat = 500
+            static let handleSize: CGSize = CGSize(width: 32, height: 4)
             static let imageHeight: CGFloat = 234
         }
     }
