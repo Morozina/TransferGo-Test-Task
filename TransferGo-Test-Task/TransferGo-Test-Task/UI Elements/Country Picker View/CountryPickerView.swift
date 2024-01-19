@@ -48,7 +48,7 @@ struct CountryPickerView: View {
                     Spacer()
                 }
                 List {
-                    ForEach(listOfCountries, id: \.self) { country in
+                    ForEach(filteredCountries, id: \.self) { country in
                         Button {
                             onAction?(country)
                         } label: {
@@ -79,6 +79,9 @@ struct CountryPickerView: View {
         }
         .padding(.top, Theme.Dimensions.marginSmallHorizontal)
         .padding(.horizontal, Theme.Dimensions.marginMediumVertical)
+        .onTapGesture {
+            hideKeyboard()
+        }
     }
 
     var ListTitle: some View {
@@ -95,6 +98,16 @@ struct CountryPickerView: View {
             return associatedCountry.getAllCountries(except: alredySelected)
         default:
             return []
+        }
+    }
+
+    var filteredCountries: [Country] {
+        guard !searchText.isEmpty else {
+            return listOfCountries
+        }
+
+        return listOfCountries.filter { country in
+            country.info.fullName.lowercased().contains(searchText.lowercased())
         }
     }
 
