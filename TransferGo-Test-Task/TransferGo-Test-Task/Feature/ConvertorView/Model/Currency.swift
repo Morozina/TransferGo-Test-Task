@@ -13,6 +13,7 @@ enum Currency: String {
     case gbp = "GBP"
     case pln = "PLN"
 
+    // MARK: - Computed properties
     var maxSendingAmount: Double {
         switch self {
         case .uah:

@@ -13,40 +13,7 @@ struct ConvertorView: View {
     var body: some View {
         VStack(spacing: .zero) {
             if !viewModel.isLoading {
-                ConvertorFormView(amount: $viewModel.fromAmount, formType: .sender(senderCountry: viewModel.senderCountry, reciverCountry: viewModel.receiverCountry), isLimitExceeded: viewModel.isLimitExceeded) { amount in
-                    Task {
-                        await viewModel.handleTextFieldAction(for: amount)
-                    }
-                } onFlagAction: {
-                    viewModel.isCountryPickerShown = true
-                    viewModel.convertorFormType = .sender(senderCountry: viewModel.senderCountry, reciverCountry: viewModel.receiverCountry)
-                }
-                .padding(.horizontal, Theme.Dimensions.marginMediumPlus)
-                .offset(y: Theme.Constants.ConvertorView.yOffsetForTopRectangle)
-                .zIndex(1)
-                .overlay(alignment: .bottomLeading) {
-                    ReverseButtonOverlay
-                }
-                .overlay(alignment: .bottom) {
-                    CurrencySection
-                }
-                ConvertorFormView(amount: $viewModel.toAmount, formType: .reciver(reciverCountry: viewModel.receiverCountry, senderCountry: viewModel.senderCountry), isLimitExceeded: false, onAmountAction: nil) {
-                    viewModel.isCountryPickerShown = true
-                    viewModel.convertorFormType = .reciver(reciverCountry: viewModel.receiverCountry, senderCountry: viewModel.senderCountry)
-                }
-                .padding(.horizontal, Theme.Dimensions.marginMediumPlus)
-                HStack(spacing: Theme.Dimensions.marginExtraExtraSmall) {
-                    if viewModel.isLimitExceeded {
-                        Spacer()
-                        Image("alert-circle")
-                        Text(viewModel.getMaxAmountText)
-                            .font(Theme.Fonts.normal14)
-                            .foregroundColor(Color(Theme.Colors.red))
-                        Spacer()
-                    }
-                }
-                .padding(.top, Theme.Dimensions.marginSemiMedium)
-                Spacer()
+                MainSection
             }
         }
         .task {
@@ -56,19 +23,18 @@ struct ConvertorView: View {
             hideKeyboard()
         }
         .sheet(isPresented: $viewModel.isCountryPickerShown) {
-            CountryPickerView(convertorFormType: viewModel.convertorFormType) { country in
-                if case .sender = viewModel.convertorFormType {
-                    viewModel.senderCountry = country
-                } else {
-                    viewModel.receiverCountry = country
-                }
+            CountryPickerView(viewModel: CountryPickerViewModel(convertorFormType: viewModel.convertorFormType) { country in
+                    viewModel.handleCountryPickerAction(for: country)
+            })
+        }
+    }
 
-                Task {
-                    await viewModel.handleTextFieldAction(for: viewModel.fromAmount)
-                }
-                
-                viewModel.isCountryPickerShown = false
-            }
+    var MainSection: some View {
+        VStack(spacing: .zero) {
+            ConvertorTopItem
+            ConvertorBottomItem
+            AlertLimitSection
+            Spacer()
         }
     }
 
@@ -93,6 +59,46 @@ struct ConvertorView: View {
                     .fill(.black)
             )
             .offset(y: Theme.Constants.ConvertorView.yOffsetForCurrencyText)
+    }
+
+    var AlertLimitSection: some View {
+        HStack(spacing: Theme.Dimensions.marginExtraExtraSmall) {
+            if viewModel.isLimitExceeded {
+                Spacer()
+                Image("alert-circle")
+                Text(viewModel.getMaxAmountText)
+                    .font(Theme.Fonts.normal14)
+                    .foregroundColor(Color(Theme.Colors.red))
+                Spacer()
+            }
+        }
+        .padding(.top, Theme.Dimensions.marginSemiMedium)
+    }
+
+    var ConvertorTopItem: some View {
+        ConvertorFormView(viewModel: ConvertorFormViewModel(amount: $viewModel.fromAmount, formType: .sender(senderCountry: viewModel.senderCountry, reciverCountry: viewModel.receiverCountry), isLimitExceeded: viewModel.isLimitExceeded) { amount in
+                viewModel.handleTextFieldAction(for: amount)
+        } onFlagAction: {
+            viewModel.isCountryPickerShown = true
+            viewModel.convertorFormType = .sender(senderCountry: viewModel.senderCountry, reciverCountry: viewModel.receiverCountry)
+        })
+        .padding(.horizontal, Theme.Dimensions.marginMediumPlus)
+        .offset(y: Theme.Constants.ConvertorView.yOffsetForTopRectangle)
+        .zIndex(1)
+        .overlay(alignment: .bottomLeading) {
+            ReverseButtonOverlay
+        }
+        .overlay(alignment: .bottom) {
+            CurrencySection
+        }
+    }
+
+    var ConvertorBottomItem: some View {
+        ConvertorFormView(viewModel: ConvertorFormViewModel(amount: $viewModel.toAmount, formType: .reciver(reciverCountry: viewModel.receiverCountry, senderCountry: viewModel.senderCountry), isLimitExceeded: false, onAmountAction: nil) {
+            viewModel.isCountryPickerShown = true
+            viewModel.convertorFormType = .reciver(reciverCountry: viewModel.receiverCountry, senderCountry: viewModel.senderCountry)
+        })
+        .padding(.horizontal, Theme.Dimensions.marginMediumPlus)
     }
 }
 
