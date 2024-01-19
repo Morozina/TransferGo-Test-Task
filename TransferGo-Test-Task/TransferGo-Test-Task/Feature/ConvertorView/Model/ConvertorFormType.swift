@@ -8,7 +8,7 @@
 import Foundation
 
 enum ConvertorFormType {
-    case sender
-    case reciver
+    case sender(senderCountry: Country, reciverCountry: Country)
+    case reciver(reciverCountry: Country, senderCountry: Country)
     case none
 }

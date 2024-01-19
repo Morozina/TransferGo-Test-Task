@@ -18,7 +18,7 @@ struct CountryPickerView: View {
                 .fill(Color(Theme.Colors.gray))
                 .frame(width: Theme.Constants.SerchView.handleSize.width, height: Theme.Constants.SerchView.handleSize.height)
 
-            Text(convertorFormType == .sender ? "Sending from" : "Sending to")
+            Text(isSender ? "Sending from" : "Sending to")
                 .font(Theme.Fonts.boldl24)
 
             TextField("", text: $searchText)
@@ -48,8 +48,29 @@ struct CountryPickerView: View {
                     Spacer()
                 }
                 List {
-                    ForEach(0...3, id: \.self) { _ in
-                        Text("HHello world")
+                    ForEach(listOfCountries, id: \.self) { country in
+                        Button {
+                            onAction?(country)
+                        } label: {
+                            HStack(spacing: Theme.Dimensions.marginMediumVertical) {
+                                Image(country.info.flag)
+                                    .resizable()
+                                    .frame(width: Theme.Constants.SerchView.flagSize.width, height: Theme.Constants.SerchView.flagSize.height)
+                                    .background(
+                                        Circle()
+                                            .fill(Color(Theme.Colors.gray))
+                                            .frame(width: Theme.Constants.SerchView.flagBackgroundSize.width, height: Theme.Constants.SerchView.flagBackgroundSize.height)
+                                    )
+                                VStack(alignment: .leading, spacing: Theme.Dimensions.marginExtraExtraSmall) {
+                                    Text(country.info.fullName)
+                                        .font(Theme.Fonts.boldl14)
+                                    Text("\(country.info.currency.fullCurrencyName) • \(country.info.currency.rawValue)")
+                                        .font(Theme.Fonts.normal14)
+                                        .foregroundColor(Color(Theme.Colors.textGray))
+                                }
+                            }
+                            .padding(.vertical, Theme.Dimensions.marginSmallHorizontal)
+                        }
                     }
                 }
                 .listStyle(PlainListStyle())
@@ -65,6 +86,24 @@ struct CountryPickerView: View {
             .font(Theme.Fonts.boldl16)
             .foregroundColor(Color.black)
             .padding(.bottom, Theme.Dimensions.marginSmallHorizontal)
+    }
+
+    // MARK: - Computed Properties
+    var listOfCountries: [Country] {
+        switch convertorFormType {
+        case .reciver(let associatedCountry, let alredySelected), .sender(let associatedCountry, let alredySelected):
+            return associatedCountry.getAllCountries(except: alredySelected)
+        default:
+            return []
+        }
+    }
+
+    var isSender: Bool {
+        if case .sender = convertorFormType {
+            return true
+        } else {
+            return false
+        }
     }
 }
 

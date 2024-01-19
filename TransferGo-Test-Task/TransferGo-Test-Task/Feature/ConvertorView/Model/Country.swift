@@ -7,19 +7,23 @@
 
 import Foundation
 
-enum Country {
+enum Country: CaseIterable {
     case ua, dk, uk, pl
 
-    var info: (flag: String, currency: Currency) {
+    var info: (fullName: String, flag: String, currency: Currency) {
         switch self {
         case .ua:
-            return ("UA", .uah)
+            return ("Ukraine", "UA", .uah)
         case .dk:
-            return ("DK", .eur)
+            return ("Germany", "DE", .eur)
         case .uk:
-            return ("UK", .gbp)
+            return ("Great Britain", "GB", .gbp)
         case .pl:
-            return ("PL", .pln)
+            return ("Poland", "PL", .pln)
         }
+    }
+
+    func getAllCountries(except selected: Country) -> [Country] {
+        Country.allCases.filter { $0 != selected }
     }
 }

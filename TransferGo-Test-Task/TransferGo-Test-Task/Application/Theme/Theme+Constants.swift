@@ -50,6 +50,8 @@ extension Theme {
 
         enum SerchView {
             static let handleSize: CGSize = CGSize(width: 32, height: 4)
+            static let flagSize: CGSize = CGSize(width: 34, height: 24)
+            static let flagBackgroundSize: CGSize = CGSize(width: 48, height: 48)
             static let imageHeight: CGFloat = 234
         }
     }

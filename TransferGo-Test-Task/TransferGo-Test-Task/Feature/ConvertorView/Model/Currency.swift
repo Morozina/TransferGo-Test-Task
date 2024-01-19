@@ -38,4 +38,17 @@ enum Currency: String {
             return "20 000"
         }
     }
+
+    var fullCurrencyName: String {
+        switch self {
+        case .uah:
+            return "Hrivna"
+        case .eur:
+            return "Euro"
+        case .gbp:
+            return "British Pound"
+        case .pln:
+            return "Polski Zloty"
+        }
+    }
 }
