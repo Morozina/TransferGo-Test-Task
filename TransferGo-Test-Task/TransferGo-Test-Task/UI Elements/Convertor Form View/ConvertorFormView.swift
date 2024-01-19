@@ -13,11 +13,10 @@ struct ConvertorFormView: View {
     @Binding var amount: String
 
     // MARK: - Dependencies
-    let associatedCountry: Country
     let formType: ConvertorFormType
     let isLimitExceeded: Bool
     let onAmountAction: ((String) -> Void)?
-    let onFlagAction: ((Country) -> Void)?
+    let onFlagAction: (() -> Void)?
 
     var body: some View {
         HStack(spacing: .zero) {
@@ -47,10 +46,10 @@ struct ConvertorFormView: View {
 
     var CurrencyButton: some View {
         Button {
-
+            onFlagAction?()
         } label: {
             HStack(spacing: Theme.Dimensions.marginExtraExtraSmall) {
-                Image(associatedCountry.info.flag)
+                Image(associatedCountry?.info.flag ?? "")
                     .resizable()
                     .frame(width: Theme.Constants.ConvertorView.smallFlagSize.width, height: Theme.Constants.ConvertorView.smallFlagSize.width)
                     .clipShape(Circle())
@@ -58,7 +57,7 @@ struct ConvertorFormView: View {
                         Circle()
                             .strokeBorder(Color.white.opacity(Theme.Constants.halfShadowOpacity), lineWidth: Theme.Dimensions.marginSmall)
                     )
-                Text(associatedCountry.info.currency.rawValue)
+                Text(associatedCountry?.info.currency.rawValue ?? "")
                     .font(Theme.Fonts.boldl14)
                     .foregroundColor(.black)
                 Image(systemName: "chevron.down")
@@ -86,14 +85,27 @@ struct ConvertorFormView: View {
     }
 
     var isReciver: Bool {
-        formType == .reciver
+        if case .reciver = formType {
+            return true
+        } else {
+            return false
+        }
     }
 
     var getColorForTextField: Color {
         isReciver ? Color.black : isLimitExceeded ? Color(Theme.Colors.red) : Color(Theme.Colors.textBlue)
     }
+
+    var associatedCountry: Country? {
+        switch formType {
+        case .reciver(let associatedCountry, _), .sender(let associatedCountry, _):
+            return associatedCountry
+        default:
+            return nil
+        }
+    }
 }
 
 #Preview {
-    ConvertorFormView(amount: .constant(""), associatedCountry: .dk, formType: .reciver, isLimitExceeded: false, onAmountAction: nil, onFlagAction: nil)
+    ConvertorFormView(amount: .constant(""), formType: .reciver(reciverCountry: .dk, senderCountry: .pl), isLimitExceeded: false, onAmountAction: nil, onFlagAction: nil)
 }

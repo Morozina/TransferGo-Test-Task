@@ -16,9 +16,11 @@ final class ConvertorViewModel: ObservableObject {
     @Published var fromAmount: String = ""
     @Published var toAmount: String = ""
     @Published var isLimitExceeded: Bool = false
+    @Published var isCountryPickerShown: Bool = false
     @Published var isLoading: Bool = true
-    @Published var sender: Country = .pl
-    @Published var reciver: Country = .ua
+    @Published var convertorFormType: ConvertorFormType = .none
+    @Published var senderCountry: Country = .pl
+    @Published var reciverCountry: Country = .ua
 
     // MARK: - Dependencies
     private let exchangeService: GetExchangeRate
@@ -30,7 +32,7 @@ final class ConvertorViewModel: ObservableObject {
 
     // MARK: - Computed properties
     var getMaxAmountText: String {
-        "Maximum sending amount \(sender.info.currency.maxAmountLabel) \(sender.info.currency.rawValue)"
+        "Maximum sending amount \(senderCountry.info.currency.maxAmountLabel) \(senderCountry.info.currency.rawValue)"
     }
 
     // MARK: - Not Private methods
@@ -41,14 +43,18 @@ final class ConvertorViewModel: ObservableObject {
     func handleTextFieldAction(for amountString: String) async {
         guard let amount = Double(amountString) else { return }
 
-        isLimitExceeded = amount > sender.info.currency.maxSendingAmount
+        isLimitExceeded = amount > senderCountry.info.currency.maxSendingAmount
 
         await updateCalculator(ammount: amount)
     }
 
+    func reverseCurrency() {
+        
+    }
+
     // MARK: - Private methods
     private func updateCalculator(ammount: Double = 300.00) async {
-        let exchangeRate: ExchangeRate? = await exchangeService.getExchangeRate(for: sender.info.currency.rawValue, to: reciver.info.currency.rawValue, ammount: ammount)
+        let exchangeRate: ExchangeRate? = await exchangeService.getExchangeRate(for: senderCountry.info.currency.rawValue, to: reciverCountry.info.currency.rawValue, ammount: ammount)
 
         guard let exchangeRate else { return }
 

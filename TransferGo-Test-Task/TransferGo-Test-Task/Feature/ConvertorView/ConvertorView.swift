@@ -13,12 +13,13 @@ struct ConvertorView: View {
     var body: some View {
         VStack(spacing: .zero) {
             if !viewModel.isLoading {
-                ConvertorFormView(amount: $viewModel.fromAmount, associatedCountry: viewModel.sender, formType: .sending, isLimitExceeded: viewModel.isLimitExceeded) { amount in
+                ConvertorFormView(amount: $viewModel.fromAmount, formType: .sender(senderCountry: viewModel.senderCountry, reciverCountry: viewModel.reciverCountry), isLimitExceeded: viewModel.isLimitExceeded) { amount in
                     Task {
                         await viewModel.handleTextFieldAction(for: amount)
                     }
-                } onFlagAction: { country in
-
+                } onFlagAction: {
+                    viewModel.isCountryPickerShown = true
+                    viewModel.convertorFormType = .sender(senderCountry: viewModel.senderCountry, reciverCountry: viewModel.reciverCountry)
                 }
                 .padding(.horizontal, Theme.Dimensions.marginMediumPlus)
                 .offset(y: Theme.Constants.ConvertorView.yOffsetForTopRectangle)
@@ -29,8 +30,9 @@ struct ConvertorView: View {
                 .overlay(alignment: .bottom) {
                     CurrencySection
                 }
-                ConvertorFormView(amount: $viewModel.toAmount, associatedCountry: viewModel.reciver, formType: .reciver, isLimitExceeded: false, onAmountAction: nil) { country in
-
+                ConvertorFormView(amount: $viewModel.toAmount, formType: .reciver(reciverCountry: viewModel.reciverCountry, senderCountry: viewModel.senderCountry), isLimitExceeded: false, onAmountAction: nil) {
+                    viewModel.isCountryPickerShown = true
+                    viewModel.convertorFormType = .reciver(reciverCountry: viewModel.reciverCountry, senderCountry: viewModel.senderCountry)
                 }
                 .padding(.horizontal, Theme.Dimensions.marginMediumPlus)
                 HStack(spacing: Theme.Dimensions.marginExtraExtraSmall) {
@@ -53,11 +55,26 @@ struct ConvertorView: View {
         .onTapGesture {
             hideKeyboard()
         }
+        .sheet(isPresented: $viewModel.isCountryPickerShown) {
+            CountryPickerView(convertorFormType: viewModel.convertorFormType) { country in
+                if case .sender = viewModel.convertorFormType {
+                    viewModel.senderCountry = country
+                } else {
+                    viewModel.reciverCountry = country
+                }
+
+                Task {
+                    await viewModel.handleTextFieldAction(for: viewModel.fromAmount)
+                }
+                
+                viewModel.isCountryPickerShown = false
+            }
+        }
     }
 
     var ReverseButtonOverlay: some View {
         Button {
-
+            viewModel.reverseCurrency()
         } label: {
             Image("reverse_ic")
         }
