@@ -30,6 +30,6 @@ final class ConvertorFormViewModelTests: XCTestCase {
     
     // MARK: - Helpers
     private func makeSut(with formType: ConvertorFormType) -> ConvertorFormViewModel {
-        ConvertorFormViewModel(amount: .constant("200"), formType: formType, isLimitExceeded: false)
+        ConvertorFormViewModel(formType: formType, isLimitExceeded: false)
     }
 }

@@ -23,9 +23,9 @@ struct ConvertorView: View {
             hideKeyboard()
         }
         .sheet(isPresented: $viewModel.isCountryPickerShown) {
-            CountryPickerView(viewModel: CountryPickerViewModel(convertorFormType: viewModel.convertorFormType) { country in
-                    viewModel.handleCountryPickerAction(for: country)
-            })
+            CountryPickerView(viewModel: CountryPickerViewModel(convertorFormType: viewModel.convertorFormType)) { country in
+                viewModel.handleCountryPickerAction(for: country)
+            }
         }
     }
 
@@ -76,12 +76,12 @@ struct ConvertorView: View {
     }
 
     var ConvertorTopItem: some View {
-        ConvertorFormView(viewModel: ConvertorFormViewModel(amount: $viewModel.fromAmount, formType: .sender(senderCountry: viewModel.senderCountry, reciverCountry: viewModel.receiverCountry), isLimitExceeded: viewModel.isLimitExceeded) { amount in
-                viewModel.handleTextFieldAction(for: amount)
+        ConvertorFormView(viewModel: ConvertorFormViewModel(formType: .sender(senderCountry: viewModel.senderCountry, reciverCountry: viewModel.receiverCountry), isLimitExceeded: viewModel.isLimitExceeded), amount: $viewModel.fromAmount) { amount in
+            viewModel.handleTextFieldAction(for: amount)
         } onFlagAction: {
             viewModel.isCountryPickerShown = true
             viewModel.convertorFormType = .sender(senderCountry: viewModel.senderCountry, reciverCountry: viewModel.receiverCountry)
-        })
+        }
         .padding(.horizontal, Theme.Dimensions.marginMediumPlus)
         .offset(y: Theme.Constants.ConvertorView.yOffsetForTopRectangle)
         .zIndex(1)
@@ -94,10 +94,10 @@ struct ConvertorView: View {
     }
 
     var ConvertorBottomItem: some View {
-        ConvertorFormView(viewModel: ConvertorFormViewModel(amount: $viewModel.toAmount, formType: .reciver(reciverCountry: viewModel.receiverCountry, senderCountry: viewModel.senderCountry), isLimitExceeded: false, onAmountAction: nil) {
+        ConvertorFormView(viewModel: ConvertorFormViewModel(formType: .reciver(reciverCountry: viewModel.receiverCountry, senderCountry: viewModel.senderCountry), isLimitExceeded: false), amount: $viewModel.toAmount, onAmountAction: nil) {
             viewModel.isCountryPickerShown = true
             viewModel.convertorFormType = .reciver(reciverCountry: viewModel.receiverCountry, senderCountry: viewModel.senderCountry)
-        })
+        }
         .padding(.horizontal, Theme.Dimensions.marginMediumPlus)
     }
 }

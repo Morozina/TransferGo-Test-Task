@@ -11,16 +11,12 @@ final class CountryPickerViewModel: ObservableObject {
     // MARK: Published
     @Published var searchText = ""
 
-    // MARK: - Actions
-    let onAction: ((Country) -> Void)?
-
     // MARK: - Dependencies
     private let convertorFormType: ConvertorFormType
 
     // MARK: - Inicialization
-    init(convertorFormType: ConvertorFormType, onAction: ((Country) -> Void)? = nil) {
+    init(convertorFormType: ConvertorFormType) {
         self.convertorFormType = convertorFormType
-        self.onAction = onAction
     }
 
     // MARK: - Computed Properties

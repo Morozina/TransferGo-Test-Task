@@ -10,6 +10,9 @@ import SwiftUI
 struct CountryPickerView: View {
     @StateObject var viewModel: CountryPickerViewModel
 
+    // MARK: - Actions
+    let onAction: ((Country) -> Void)?
+
     var body: some View {
         VStack(spacing: Theme.Dimensions.marginMediumPlus) {
             RectangleHandleSection
@@ -97,7 +100,7 @@ struct CountryPickerView: View {
                 }
                 .padding(.vertical, Theme.Dimensions.marginSmallHorizontal)
                 .onTapGesture {
-                    viewModel.onAction?(country)
+                    onAction?(country)
                 }
             }
         }
@@ -106,5 +109,5 @@ struct CountryPickerView: View {
 }
 
 #Preview {
-    CountryPickerView(viewModel: CountryPickerViewModel(convertorFormType: .none))
+    CountryPickerView(viewModel: CountryPickerViewModel(convertorFormType: .none), onAction: nil)
 }

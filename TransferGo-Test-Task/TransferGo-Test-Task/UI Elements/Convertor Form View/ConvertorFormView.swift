@@ -9,7 +9,14 @@ import SwiftUI
 import Combine
 
 struct ConvertorFormView: View {
-    @StateObject var viewModel: ConvertorFormViewModel
+    let viewModel: ConvertorFormViewModel
+
+    //MARK: - Binding
+    @Binding var amount: String
+
+    // MARK: - Action
+    let onAmountAction: ((String) -> Void)?
+    let onFlagAction: (() -> Void)?
 
     var body: some View {
         HStack(spacing: .zero) {
@@ -39,7 +46,7 @@ struct ConvertorFormView: View {
 
     var CurrencyButton: some View {
         Button {
-            viewModel.onFlagAction?()
+            onFlagAction?()
         } label: {
             HStack(spacing: Theme.Dimensions.marginExtraExtraSmall) {
                 Image(viewModel.associatedCountry?.info.flag ?? "")
@@ -61,23 +68,23 @@ struct ConvertorFormView: View {
     }
 
     var TextFieldSection: some View {
-        TextField("........", text: $viewModel.amount)
+        TextField("........", text: $amount)
             .font(Theme.Fonts.boldl32)
             .foregroundColor(viewModel.getColorForTextField)
             .multilineTextAlignment(.trailing)
             .keyboardType(.numberPad)
             .disabled(viewModel.isReciver)
-            .onReceive(Just(viewModel.amount)) { newValue in
+            .onReceive(Just(amount)) { newValue in
                 if newValue.count > Theme.Constants.ConvertorForm.maxTextFieldCount && !viewModel.isReciver {
-                    viewModel.amount = String(newValue.prefix(Theme.Constants.ConvertorForm.maxTextFieldCount))
+                    amount = String(newValue.prefix(Theme.Constants.ConvertorForm.maxTextFieldCount))
                 }
             }
-            .onChange(of: viewModel.amount) {
-                viewModel.onAmountAction?(viewModel.amount)
+            .onChange(of: amount) {
+                onAmountAction?(amount)
             }
     }
 }
 
 #Preview {
-    ConvertorFormView(viewModel: ConvertorFormViewModel(amount: .constant(""), formType: .reciver(reciverCountry: .dk, senderCountry: .pl), isLimitExceeded: false))
+    ConvertorFormView(viewModel: ConvertorFormViewModel(formType: .reciver(reciverCountry: .dk, senderCountry: .pl), isLimitExceeded: false), amount: .constant(""), onAmountAction: nil, onFlagAction: nil)
 }

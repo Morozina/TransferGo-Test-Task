@@ -8,24 +8,14 @@
 import SwiftUI
 
 final class ConvertorFormViewModel: ObservableObject {
-    //MARK: - Binding
-    @Binding var amount: String
-
-    // MARK: - Action
-    let onAmountAction: ((String) -> Void)?
-    let onFlagAction: (() -> Void)?
-
     // MARK: - Dependencies
     let formType: ConvertorFormType
     let isLimitExceeded: Bool
 
     // MARK: - Inicialization
-    internal init(amount: Binding<String>, formType: ConvertorFormType, isLimitExceeded: Bool, onAmountAction: ((String) -> Void)? = nil, onFlagAction: (() -> Void)? = nil) {
-        self._amount = amount
+    internal init(formType: ConvertorFormType, isLimitExceeded: Bool) {
         self.formType = formType
         self.isLimitExceeded = isLimitExceeded
-        self.onAmountAction = onAmountAction
-        self.onFlagAction = onFlagAction
     }
 
     // MARK: - Computed properties
