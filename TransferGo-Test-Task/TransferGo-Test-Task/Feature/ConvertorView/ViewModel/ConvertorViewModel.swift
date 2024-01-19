@@ -20,7 +20,7 @@ final class ConvertorViewModel: ObservableObject {
     @Published var isLoading: Bool = true
     @Published var convertorFormType: ConvertorFormType = .none
     @Published var senderCountry: Country = .pl
-    @Published var reciverCountry: Country = .ua
+    @Published var receiverCountry: Country = .ua
 
     // MARK: - Dependencies
     private let exchangeService: GetExchangeRate
@@ -45,16 +45,24 @@ final class ConvertorViewModel: ObservableObject {
 
         isLimitExceeded = amount > senderCountry.info.currency.maxSendingAmount
 
-        await updateCalculator(ammount: amount)
+        await updateCalculator(amount: amount)
     }
 
     func reverseCurrency() {
-        
+        let temporaryCountry = senderCountry
+        let temporaryAmount = fromAmount
+
+
+        senderCountry = receiverCountry
+        receiverCountry = temporaryCountry
+
+        fromAmount = toAmount
+        toAmount = temporaryAmount
     }
 
     // MARK: - Private methods
-    private func updateCalculator(ammount: Double = 300.00) async {
-        let exchangeRate: ExchangeRate? = await exchangeService.getExchangeRate(for: senderCountry.info.currency.rawValue, to: reciverCountry.info.currency.rawValue, ammount: ammount)
+    private func updateCalculator(amount: Double = 300.00) async {
+        let exchangeRate: ExchangeRate? = await exchangeService.getExchangeRate(for: senderCountry.info.currency.rawValue, to: receiverCountry.info.currency.rawValue, amount: amount)
 
         guard let exchangeRate else { return }
 
