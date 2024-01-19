@@ -13,13 +13,13 @@ struct ConvertorView: View {
     var body: some View {
         VStack(spacing: .zero) {
             if !viewModel.isLoading {
-                ConvertorFormView(amount: $viewModel.fromAmount, formType: .sender(senderCountry: viewModel.senderCountry, reciverCountry: viewModel.reciverCountry), isLimitExceeded: viewModel.isLimitExceeded) { amount in
+                ConvertorFormView(amount: $viewModel.fromAmount, formType: .sender(senderCountry: viewModel.senderCountry, reciverCountry: viewModel.receiverCountry), isLimitExceeded: viewModel.isLimitExceeded) { amount in
                     Task {
                         await viewModel.handleTextFieldAction(for: amount)
                     }
                 } onFlagAction: {
                     viewModel.isCountryPickerShown = true
-                    viewModel.convertorFormType = .sender(senderCountry: viewModel.senderCountry, reciverCountry: viewModel.reciverCountry)
+                    viewModel.convertorFormType = .sender(senderCountry: viewModel.senderCountry, reciverCountry: viewModel.receiverCountry)
                 }
                 .padding(.horizontal, Theme.Dimensions.marginMediumPlus)
                 .offset(y: Theme.Constants.ConvertorView.yOffsetForTopRectangle)
@@ -30,9 +30,9 @@ struct ConvertorView: View {
                 .overlay(alignment: .bottom) {
                     CurrencySection
                 }
-                ConvertorFormView(amount: $viewModel.toAmount, formType: .reciver(reciverCountry: viewModel.reciverCountry, senderCountry: viewModel.senderCountry), isLimitExceeded: false, onAmountAction: nil) {
+                ConvertorFormView(amount: $viewModel.toAmount, formType: .reciver(reciverCountry: viewModel.receiverCountry, senderCountry: viewModel.senderCountry), isLimitExceeded: false, onAmountAction: nil) {
                     viewModel.isCountryPickerShown = true
-                    viewModel.convertorFormType = .reciver(reciverCountry: viewModel.reciverCountry, senderCountry: viewModel.senderCountry)
+                    viewModel.convertorFormType = .reciver(reciverCountry: viewModel.receiverCountry, senderCountry: viewModel.senderCountry)
                 }
                 .padding(.horizontal, Theme.Dimensions.marginMediumPlus)
                 HStack(spacing: Theme.Dimensions.marginExtraExtraSmall) {
@@ -60,7 +60,7 @@ struct ConvertorView: View {
                 if case .sender = viewModel.convertorFormType {
                     viewModel.senderCountry = country
                 } else {
-                    viewModel.reciverCountry = country
+                    viewModel.receiverCountry = country
                 }
 
                 Task {
