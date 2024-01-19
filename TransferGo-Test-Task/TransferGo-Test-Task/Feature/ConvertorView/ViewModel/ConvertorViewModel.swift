@@ -12,9 +12,9 @@ final class ConvertorViewModel: ObservableObject {
     // MARK: - Published
     @Published var from: String = ""
     @Published var to: String = ""
-    @Published var rate: Double = .zero
     @Published var fromAmount: String = ""
     @Published var toAmount: String = ""
+    @Published var rate: Double = .zero
     @Published var isLimitExceeded: Bool = false
     @Published var isCountryPickerShown: Bool = false
     @Published var isLoading: Bool = true
@@ -40,12 +40,26 @@ final class ConvertorViewModel: ObservableObject {
         await updateCalculator()
     }
 
-    func handleTextFieldAction(for amountString: String) async {
+    func handleTextFieldAction(for amountString: String) {
         guard let amount = Double(amountString) else { return }
 
         isLimitExceeded = amount > senderCountry.info.currency.maxSendingAmount
 
-        await updateCalculator(amount: amount)
+        Task {
+            await updateCalculator(amount: amount)
+        }
+    }
+
+    func handleCountryPickerAction(for country: Country) {
+        if case .sender = convertorFormType {
+            senderCountry = country
+        } else {
+            receiverCountry = country
+        }
+
+        handleTextFieldAction(for: fromAmount)
+
+        isCountryPickerShown = false
     }
 
     func reverseCurrency() {

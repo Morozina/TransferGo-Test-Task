@@ -10,6 +10,7 @@ import Foundation
 enum Country: CaseIterable {
     case ua, dk, uk, pl
 
+    // MARK: - Computed properties
     var info: (fullName: String, flag: String, currency: Currency) {
         switch self {
         case .ua:
@@ -23,6 +24,7 @@ enum Country: CaseIterable {
         }
     }
 
+    // MARK: - Methods
     func getAllCountries(except selected: Country) -> [Country] {
         Country.allCases.filter { $0 != selected }
     }

@@ -9,14 +9,7 @@ import SwiftUI
 import Combine
 
 struct ConvertorFormView: View {
-    //MARK: - Binding
-    @Binding var amount: String
-
-    // MARK: - Dependencies
-    let formType: ConvertorFormType
-    let isLimitExceeded: Bool
-    let onAmountAction: ((String) -> Void)?
-    let onFlagAction: (() -> Void)?
+    @StateObject var viewModel: ConvertorFormViewModel
 
     var body: some View {
         HStack(spacing: .zero) {
@@ -29,27 +22,27 @@ struct ConvertorFormView: View {
         }
         .padding(.horizontal, Theme.Dimensions.marginSmallHorizontal)
         .padding(.bottom, Theme.Dimensions.marginSemiMedium)
-        .padding(.top, isReciver ? Theme.Dimensions.marginSemiExtraLarge : Theme.Dimensions.marginMediumVertical)
+        .padding(.top, viewModel.isReciver ? Theme.Dimensions.marginSemiExtraLarge : Theme.Dimensions.marginMediumVertical)
         .background(
             RoundedRectangle(cornerRadius: Theme.Constants.defaultCornerRadius)
-                .fill(isReciver ? Color(Theme.Colors.gray) : Color.white)
-                .stroke(isLimitExceeded ? Color(Theme.Colors.red) : Color(Theme.Colors.gray), lineWidth: Theme.Dimensions.marginSmall)
-                .shadow(color: .black.opacity(isReciver ? .zero : Theme.Constants.smallShadowOpacity), radius: Theme.Dimensions.defaultLayoutMargin, x: .zero, y: .zero)
+                .fill(viewModel.isReciver ? Color(Theme.Colors.gray) : Color.white)
+                .stroke(viewModel.isLimitExceeded ? Color(Theme.Colors.red) : Color(Theme.Colors.gray), lineWidth: Theme.Dimensions.marginSmall)
+                .shadow(color: .black.opacity(viewModel.isReciver ? .zero : Theme.Constants.smallShadowOpacity), radius: Theme.Dimensions.defaultLayoutMargin, x: .zero, y: .zero)
         )
     }
 
     var FormTypeSection: some View {
-        Text(isReciver ? "Reciver gets" : "Sending from")
+        Text(viewModel.isReciver ? "Reciver gets" : "Sending from")
             .font(Theme.Fonts.normal14)
             .foregroundColor(Color(Theme.Colors.textGray))
     }
 
     var CurrencyButton: some View {
         Button {
-            onFlagAction?()
+            viewModel.onFlagAction?()
         } label: {
             HStack(spacing: Theme.Dimensions.marginExtraExtraSmall) {
-                Image(associatedCountry?.info.flag ?? "")
+                Image(viewModel.associatedCountry?.info.flag ?? "")
                     .resizable()
                     .frame(width: Theme.Constants.ConvertorView.smallFlagSize.width, height: Theme.Constants.ConvertorView.smallFlagSize.width)
                     .clipShape(Circle())
@@ -57,7 +50,7 @@ struct ConvertorFormView: View {
                         Circle()
                             .strokeBorder(Color.white.opacity(Theme.Constants.halfShadowOpacity), lineWidth: Theme.Dimensions.marginSmall)
                     )
-                Text(associatedCountry?.info.currency.rawValue ?? "")
+                Text(viewModel.associatedCountry?.info.currency.rawValue ?? "")
                     .font(Theme.Fonts.boldl14)
                     .foregroundColor(.black)
                 Image(systemName: "chevron.down")
@@ -68,44 +61,23 @@ struct ConvertorFormView: View {
     }
 
     var TextFieldSection: some View {
-        TextField("........", text: $amount)
+        TextField("........", text: $viewModel.amount)
             .font(Theme.Fonts.boldl32)
-            .foregroundColor(getColorForTextField)
+            .foregroundColor(viewModel.getColorForTextField)
             .multilineTextAlignment(.trailing)
             .keyboardType(.numberPad)
-            .disabled(isReciver)
-            .onReceive(Just(amount)) { newValue in
-                if newValue.count > Theme.Constants.ConvertorForm.maxTextFieldCount && !isReciver {
-                    amount = String(newValue.prefix(Theme.Constants.ConvertorForm.maxTextFieldCount))
+            .disabled(viewModel.isReciver)
+            .onReceive(Just(viewModel.amount)) { newValue in
+                if newValue.count > Theme.Constants.ConvertorForm.maxTextFieldCount && !viewModel.isReciver {
+                    viewModel.amount = String(newValue.prefix(Theme.Constants.ConvertorForm.maxTextFieldCount))
                 }
             }
-            .onChange(of: amount) {
-                onAmountAction?(amount)
+            .onChange(of: viewModel.amount) {
+                viewModel.onAmountAction?(viewModel.amount)
             }
-    }
-
-    var isReciver: Bool {
-        if case .reciver = formType {
-            return true
-        } else {
-            return false
-        }
-    }
-
-    var getColorForTextField: Color {
-        isReciver ? Color.black : isLimitExceeded ? Color(Theme.Colors.red) : Color(Theme.Colors.textBlue)
-    }
-
-    var associatedCountry: Country? {
-        switch formType {
-        case .reciver(let associatedCountry, _), .sender(let associatedCountry, _):
-            return associatedCountry
-        default:
-            return nil
-        }
     }
 }
 
 #Preview {
-    ConvertorFormView(amount: .constant(""), formType: .reciver(reciverCountry: .dk, senderCountry: .pl), isLimitExceeded: false, onAmountAction: nil, onFlagAction: nil)
+    ConvertorFormView(viewModel: ConvertorFormViewModel(amount: .constant(""), formType: .reciver(reciverCountry: .dk, senderCountry: .pl), isLimitExceeded: false))
 }
